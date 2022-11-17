@@ -15,21 +15,21 @@ class ProviderTestWidget extends StatefulWidget {
 }
 
 class _ProviderTestWidgetState extends State<ProviderTestWidget> {
-  final companyNotifier = GlobalNotifier();
+  GlobalNotifier? companyNotifier;
 
   //我们设置一个Provider
   Widget localProvider({required Widget child}) {
     //内外同时使用 同一个类型 value 时，会获取离得最近的 Provider 提供的内容
     //不想使用前面的 provider 的话，可以直接返回child试试效果，相信马上会理解
     //前面main里面也是这个global类型，这里也是，会获取到最近的局部 value
-    // return ChangeNotifierProvider(create: (_) => GlobalNotifier(), child: child);
+    return ChangeNotifierProvider(create: (_) => GlobalNotifier(), child: child);
+
     //如果value由外部传入更新，最好使用 ChangeNotifierProvider.value 形式
     //这样内外会使用同一个 value，更新时会得到同样的效果
-    // return ChangeNotifierProvider.value(
-    //   value: companyNotifier,
-    //   child: child,
-    // );
-    return child; //可以直接返回一个 child 测试一下没有局部 Provider 效果
+    return ChangeNotifierProvider.value(
+      value: companyNotifier,
+      child: child,
+    );
   }
 
   //从上面也可以看出，我们引用中可能使用了多个 provider，提供多个数据

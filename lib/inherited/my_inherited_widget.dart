@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 class MyInheritedWidget extends InheritedWidget {
   final String username;
 
-   const MyInheritedWidget({
+  const MyInheritedWidget({
     Key? key,
     required this.username,
     required Widget child,
   }) : super(key: key, child: child);
 
   //就像 Navigator.of(context)一样获取，用于调用内部参数
-   static MyInheritedWidget of(BuildContext context) {
+  static MyInheritedWidget of(BuildContext context) {
     final MyInheritedWidget? result = context.dependOnInheritedWidgetOfExactType<MyInheritedWidget>();
     assert(result != null, 'No MyInherited found in context');
     return result!;
